@@ -14,6 +14,9 @@ spec:
       labels:
         app: db
     spec:
+      securityContext:
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
       containers:
       - image: postgres:15-alpine
         name: postgres
@@ -22,12 +25,24 @@ spec:
           value: postgres
         - name: POSTGRES_PASSWORD
           value: postgress
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "300Mi"
+          limits:
+            cpu: "150m"
+            memory: "500Mi"
         ports:
         - containerPort: 5432
           name: postgres
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
       volumes:
       - name: db-data
         emptyDir: {} 
