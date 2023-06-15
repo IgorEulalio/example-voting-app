@@ -24,7 +24,7 @@ spec:
         - name: POSTGRES_USER
           value: postgres
         - name: POSTGRES_PASSWORD
-          value: postgress
+          value: postgres
         resources:
           requests:
             cpu: "100m"
