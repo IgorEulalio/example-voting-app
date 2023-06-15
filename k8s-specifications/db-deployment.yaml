@@ -37,7 +37,7 @@ spec:
           name: postgres
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
-          name: db-data
+          name: db-data-fix
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -45,5 +45,6 @@ spec:
             drop:
               - ALL
       volumes:
-      - name: db-data
+      - name: db-data-fix
         emptyDir: {} 
+
