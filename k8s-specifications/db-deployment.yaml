@@ -15,8 +15,8 @@ spec:
         app: db
     spec:
       securityContext:
-        runAsUser: 1001
-        runAsGroup: 1001
+        runAsUser: 10001
+        runAsGroup: 10001
         runAsNonRoot: true
         allowPrivilegeEscalation: false
         readOnlyRootFilesystem: true
@@ -45,8 +45,8 @@ spec:
         - mountPath: /var/lib/postgresql/data
           name: db-data-fix
         securityContext:
-          runAsUser: 1001
-          runAsGroup: 1001
+          runAsUser: 10001
+          runAsGroup: 10001
           runAsNonRoot: true
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
