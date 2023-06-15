@@ -15,7 +15,8 @@ spec:
         app: db
     spec:
       securityContext:
-        runAsUser: 101
+        runAsUser: 1001
+        runAsGroup: 1001
         readOnlyRootFilesystem: true
       containers:
       - image: postgres:15-alpine
@@ -44,6 +45,24 @@ spec:
           capabilities:
             drop:
               - ALL
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "psql -U $POSTGRES_USER -d postgres -c 'SELECT 1'"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "psql -U $POSTGRES_USER -d postgres -c 'SELECT 1'"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
       volumes:
       - name: db-data-fix
         emptyDir: {} 
